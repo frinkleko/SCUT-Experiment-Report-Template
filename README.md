@@ -16,9 +16,11 @@
   当然如果你不喜欢这个包，而更熟悉listing。选用它不会存在任何问题。
 
 + 推荐使用xelatex进行编译，pdflatex**不能**支持fontspec宏包
++ 请将图片统一放在images文件夹，在tex中使用时则只需要call 文件名即可
 
 ## 意见感谢
 [@Xshellye](https://github.com/Xshellye)对排版和字体字号的优化建议
+
 [@CHAOS2629](https://github.com/CHAOS2629)对本模板功能需求的补充
 
 ## 贡献和更多意见&反馈
