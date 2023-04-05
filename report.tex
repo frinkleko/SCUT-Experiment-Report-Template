@@ -1,0 +1,216 @@
+\documentclass[a4paper,12pt]{ctexart}
+    \title{\fontsize{30pt}{\baselineskip}\selectfont\textbf{?}}
+    \author{}
+    \date{}
+    \usepackage{amsmath}
+    \usepackage{fancyhdr}    % 页眉页脚格式控制
+    \usepackage{caption}
+    \usepackage{titlesec}
+    \usepackage{indentfirst}
+    \usepackage{minted}
+    \usepackage{listings}    % 代码插入
+    \usepackage{xcolor}        % 颜色
+    \usepackage{fontspec}    % 选字体
+	\usepackage[T1]{fontenc}
+	\usepackage{booktabs} % 三线表
+    \usepackage{bookmark}
+    \usepackage{subfigure}
+    \usepackage{clrscode}
+    \usepackage{hyperref}    % 交叉引用
+                            % \aref{LABEL_HERE}
+    \usepackage{makecell}    % 表格特殊单元格设计
+    \usepackage{multirow}
+    \usepackage{multicol}
+    \usepackage{longtable}
+    \usepackage{dirtree}
+    \usepackage{amssymb}
+    \usepackage{mdwlist}
+    \usepackage{graphicx}
+    \usepackage{geometry}
+	\usepackage[inkscapelatex=false]{svg} % 支持svg图片,当然推荐您直接插入pdf图片
+
+    \hypersetup{pdftitle={PDFTITLE},    %pdf文件属性
+                pdfauthor={PDFAUTHOR}}
+    \geometry{left=3.17cm,right=3.17cm,top=2.54cm,bottom=2.54cm}
+    \setcounter{tocdepth}{3}
+    
+    \newfontfamily\consolas{Consolas}    % 引入 Monaco 字体    
+	\pagestyle{fancy}	% 页眉 及 页脚
+		\lhead{}
+		\chead{}
+		\rhead{\textsl{South China University of Technology}}
+		\lfoot{}
+		\rfoot{}
+		\cfoot{\thepage}
+	\renewcommand{\headrulewidth}{0pt}
+    \newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}    % 单元格内建表
+    
+    \setlength{\parindent}{2em}
+ 
+    \captionsetup[figure]{labelfont={bf},labelformat={simple},labelsep=period,name={图}}
+    \captionsetup[table]{labelfont={bf},labelformat={simple},labelsep=period,name={表}}
+    
+    \newcommand{\sectionfontsize}{\fontsize{15pt}{18pt}\selectfont}
+    \newcommand{\parfontsize}{\fontsize{12pt}{18pt}\selectfont}
+
+    \ctexset{
+        % 修改 section。
+        section={   
+            name={实验,：},
+            number={\chinese{section}},
+            format=\heiti\bfseries\centering\zihao{-2} % 设置 section 标题为黑体、右对齐、小4号字
+        },
+        % 修改 subsection。
+        subsection={   
+            name={,、},
+            number={\chinese{subsection}},
+            format=\songti\bfseries\zihao{4} % 设置 subsection 标题为黑体、5号字
+        },
+        % 修改 subsection。
+        subsubsection={   
+            name={,、},
+            number={\arabic{subsubsection}},
+            format=\songti\bfseries\zihao{-4} % 设置 subsection 标题为黑体、5号字
+        }
+    }
+    \fancyhead{}
+    
+    \hypersetup{hidelinks}
+    \def\figureautorefname{图}%
+    \def\tableautorefname{表}%
+    \newcommand{\aref}[1]{\textbf{\autoref{#1}}}
+    
+    \newcounter{RomanNumber}
+    \newcommand{\romanNumber}[1]{\setcounter{RomanNumber}{#1}\Roman{RomanNumber}}    
+    
+    \hfuzz=\maxdimen    % 忽略宽度限定
+    \tolerance=10000
+    \hbadness=10000
+    
+    \setlength{\baselineskip}{30pt}
+    \renewcommand{\contentsname}{\hspace*{\fill}目\quad 录\hspace*{\fill}}
+    
+\begin{document}
+%%--------------------------FORE_PAGE---------------------------%%
+
+%制作封面
+\begin{titlepage}
+    \begin{center}
+        \par
+        \centerline{\includegraphics[scale=1.2]{images/logo.png}} %插入图片
+        \par
+        \vskip 5cm
+        \lishu \fontsize{50}{20} 实\quad 验\quad 报\quad 告
+        \vskip 10cm
+
+        \begin{tabular}{l}
+            \songti \zihao{-2} \bfseries 课程名称：
+            \quad \\
+            \songti \zihao{-2} \bfseries 学生姓名：
+            \quad \\
+            \songti \zihao{-2} \bfseries 学生学号：
+            \quad \\
+            \songti \zihao{-2} \bfseries 学生专业：
+            \quad \\
+            \songti \zihao{-2} \bfseries 开课学期 ：
+            \quad \\
+            \songti \zihao{-2} \bfseries  提交日期：\today
+        \end{tabular}
+    \end{center}
+\end{titlepage}
+
+% 生成目录
+\newpage
+% \pagestyle{empty}
+\begin{center}
+    \tableofcontents
+\end{center}
+
+%%--------------------------MAIN_BODY--------------------------%%
+\newpage
+
+\setcounter{page}{1}
+
+\section{XXXXXX}
+\subsection{实验目的}
+这里写实验目的。
+
+\subsection{实验题目}
+这里写实验原理。可以使用公式、图表等辅助说明。
+
+\subsection{实验内容}
+这里写实验步骤与过程。
+\subsubsection{代码插入演示}
+
+\begin{minted}{python}
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from sklearn import datasets, linear_model
+    from sklearn.metrics import mean_squared_error, r2_score
+
+    # Load the diabetes dataset
+    diabetes = datasets.load_diabetes()
+
+    # Use only one feature
+    diabetes_X = diabetes.data[:, np.newaxis, 2]
+
+    # Split the data into training/testing sets
+    diabetes_X_train = diabetes_X[:-20]
+    diabetes_X_test = diabetes_X[-20:]
+\end{minted}
+
+当然你也可以尝试用listing展示minted，效果如下
+\begin{listing}[!ht]
+    \begin{minted}{c}
+    #include <stdio.h>
+    int main() {
+       printf("Hello, World!"); /*printf() outputs the quoted string*/
+       return 0;
+    }
+    \end{minted}
+    \caption{Hello World in C}
+    \label{listing:2}
+\end{listing}
+
+\begin{listing}[!ht]
+    \begin{minted}{lua}
+    function fact (n)--defines a factorial function
+      if n == 0 then
+        return 1
+      else
+        return n * fact(n-1)
+      end
+    end
+    
+    print("enter a number:")
+    a = io.read("*number") -- read a number
+    print(fact(a))
+    \end{minted}
+    \caption{Example from the Lua manual}
+    \label{listing:3}
+\end{listing}
+\noindent\texttt{minted} makes a nice job of typesetting listings \ref{listing:2} and \ref{listing:3}.
+\subsubsection{三线表示例}
+\begin{table}[htbp]
+    \centering
+    \caption{three-line table}
+    \begin{tabular}{cccc}
+        \toprule  % 顶部线
+        1   & 2   & 3   & 4   \\
+        \midrule  % 中部线
+        0.1 & 0.2 & 0.3 & 0.4 \\
+        \bottomrule  % 底部线
+    \end{tabular}
+\end{table}
+
+
+\subsection{实验结果}
+这里展示实验结果。可以使用图表等形式展示。
+
+\subsection{实验结论}
+这里对实验结果进行分析与讨论，给出实验结论。
+
+\newpage
+\section{XXXXXX}
+
+\end{document}
